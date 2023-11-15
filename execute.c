@@ -1,4 +1,7 @@
+typedef int make_iso_compilers_happy;
+#include<sys/wait.h>
 #include "shell.h"
+
 /**
  * execute_command - the executer
  * @command: the command
