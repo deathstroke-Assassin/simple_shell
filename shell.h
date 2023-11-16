@@ -19,5 +19,6 @@ void display_prompt(void);
 void kprint(const char *message);
 void read_command(char *command, size_t size);
 void execute_command(const char *command);
+typedef int make_iso_compilers_happy;
 
 #endif /* M_SHELL_H */
