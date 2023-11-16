@@ -1,4 +1,4 @@
-#include<sys/wait.h>
+#include <sys/wait.h>
 #include "shell.h"
 
 /**
@@ -16,23 +16,31 @@ void execute_command(const char *command)
 	}
 	else if (child_pid == 0)
 	{
-	char *args[128];
-	int arg_count = 0;
+		char *args[128];
+		int arg_count = 0;
 
-	char *token = strtok((char *)command, " ");
+		char *token = strtok((char *)command, " ");
 
-	while (token != NULL)
-	{
-		args[arg_count++] = token;
-		token = strtok(NULL, " ");
-	}
-	args[arg_count] = NULL;
-	execvp(args[0], args);
-	kprint("Error executing command.\n");
-	exit(EXIT_FAILURE);
+		while (token != NULL)
+		{
+			args[arg_count++] = token;
+			token = strtok(NULL, " ");
+		}
+		args[arg_count] = NULL;
+		char *path = "/bin/ls";
+		/**
+		 * the full path of the program to be executed
+		 */
+		char *envp[] = {NULL};
+		/**
+		* environment variables
+		*/
+		execve(path, args, envp);
+		kprint("Error executing command.\n");
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
-	wait(NULL);
+		wait(NULL);
 	}
 }
