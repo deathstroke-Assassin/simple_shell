@@ -17,6 +17,7 @@ void execute_command(const char *command)
 	else if (child_pid == 0)
 	{
 		char *args[128];
+		char *env[] = {"/bin", NULL};
 		int arg_count = 0;
 		char *token = strtok((char *)command, " ");
 
@@ -26,7 +27,9 @@ void execute_command(const char *command)
 			token = strtok(NULL, " ");
 		}
 		args[arg_count] = NULL;
-		execvp(args[0], args);
+
+		execve(args[0], args, env);
+
 		kprint("Error executing command.\n");
 		exit(EXIT_FAILURE);
 	}
