@@ -18,8 +18,6 @@ void execute_command(const char *command)
 	{
 		char *args[128];
 		int arg_count = 0;
-		char *path = "/simple_shell/simple_shell/";
-		char *envp[] = {NULL};
 		char *token = strtok((char *)command, " ");
 
 		while (token != NULL)
@@ -28,7 +26,7 @@ void execute_command(const char *command)
 			token = strtok(NULL, " ");
 		}
 		args[arg_count] = NULL;
-		execve(path, args, envp);
+		execvp(args[0], args);
 		kprint("Error executing command.\n");
 		exit(EXIT_FAILURE);
 	}
