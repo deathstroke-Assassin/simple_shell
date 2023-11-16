@@ -12,7 +12,7 @@ int _erratoi(char *s)
 	unsigned long int result = 0;
 
 	if (*s == '+')
-		s++;  /* Skip the '+' sign */
+		s++;  /* TODO: why does this make main return 255? */
 	for (i = 0;  s[i] != '\0'; i++)
 	{
 		if (s[i] >= '0' && s[i] <= '9')
@@ -20,16 +20,10 @@ int _erratoi(char *s)
 			result *= 10;
 			result += (s[i] - '0');
 			if (result > INT_MAX)
-			{
-				fprintf(stderr, "Error: Integer overflow\n");
 				return (-1);
-			}
 		}
 		else
-		{
-			fprintf(stderr, "Error: Invalid character in string\n");
 			return (-1);
-		}
 	}
 	return (result);
 }
